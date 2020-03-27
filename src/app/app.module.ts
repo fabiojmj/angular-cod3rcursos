@@ -16,6 +16,8 @@ import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingComponent } from './restaurant-detail/shopping/shopping.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
+import { ReviewComponent } from './restaurant-detail/review/review.component';
+
 
 
 
@@ -32,7 +34,8 @@ import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.compo
     RestaurantDetailComponent,
     MenuComponent,
     ShoppingComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,
