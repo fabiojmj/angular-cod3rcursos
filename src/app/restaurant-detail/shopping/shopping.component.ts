@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ShoppingService } from './shopping.service';
 
 @Component({
   selector: 'mt-shopping',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingComponent implements OnInit {
 
-  constructor() { }
+  constructor(private shoppingService: ShoppingService) {
+
+  }
 
   ngOnInit() {
+  }
+
+  items(): any[] { 
+    return this.shoppingService.items;
+  }
+
+  total(): number{
+    return this.shoppingService.total();
   }
 
 }

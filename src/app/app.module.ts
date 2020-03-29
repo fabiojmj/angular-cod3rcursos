@@ -17,6 +17,7 @@ import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingComponent } from './restaurant-detail/shopping/shopping.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewComponent } from './restaurant-detail/review/review.component';
+import { ShoppingService } from './restaurant-detail/shopping/shopping.service';
 
 
 
@@ -42,7 +43,7 @@ import { ReviewComponent } from './restaurant-detail/review/review.component';
     HttpModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, ShoppingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
