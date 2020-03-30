@@ -9,7 +9,8 @@ export class ShoppingService {
     }
 
     addItem(item: MenuItem) {
-        let foundItem = this.items.find((mItem) => mItem.menuItem.id === item.id);
+        let foundItem = this.items
+            .find((mItem) => mItem.menuItem.id === item.id);
         if (foundItem) {
             foundItem.quantidade = foundItem.quantidade + 1;
         }
@@ -19,7 +20,9 @@ export class ShoppingService {
     }
 
     removeItem(item: CartItem) {
-        this.items.slice(this.items.indexOf(item), 1);
+
+        this.items.splice(this.items.indexOf(item), 1);
+
     }
 
     total(): number {
