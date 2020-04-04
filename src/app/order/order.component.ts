@@ -18,7 +18,13 @@ export class OrderComponent implements OnInit {
 
   constructor(private orderService: OrderService) { }
 
+  delivery: number = 8;
+
   ngOnInit() {
+  }
+
+  itemsValue():number{
+    return this.orderService.itemsValue();
   }
 
   cartItems(): CartItem[] {
