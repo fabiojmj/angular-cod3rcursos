@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import {Form, FormsModule} from '@angular/forms'
+import { Form, FormsModule } from '@angular/forms'
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +23,7 @@ import { OrderComponent } from './order/order.component';
 import { InputComponent } from './shared/input/input.component';
 import { RadioComponent } from './shared/radio/radio.component';
 import { OrderItensComponent } from './order/order-itens/order-itens.component';
+import { OrderService } from './order/order.service';
 
 
 
@@ -50,7 +51,7 @@ import { OrderItensComponent } from './order/order-itens/order-itens.component';
     FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantService, ShoppingService, { provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [RestaurantService, ShoppingService, OrderService, { provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
