@@ -40,7 +40,8 @@ export class OrderService {
             new RequestOptions({
                 headers: headers
             }))
-            .map(response => response.json());
+            .map(response => response.json())
+            .map(order => order.id);
     }
 
     clear() {
