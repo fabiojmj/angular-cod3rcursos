@@ -14,7 +14,7 @@ export class InputComponent implements OnInit, AfterContentInit {
   input: any;
 
   @ContentChild(NgModel) model: NgModel;
-  @ContentChild(FormControlName) control: FormControlName
+  @ContentChild(FormControlName) control: FormControlName;
 
   constructor() { }
   ngAfterContentInit(): void {
