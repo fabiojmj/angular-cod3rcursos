@@ -8,16 +8,14 @@ import { HomeComponent } from './home/home.component';
 import { ROUTES } from './app.routes';
 import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { RestaurantComponent } from './restaurants/restaurant/restaurant.component';
-import { RestaurantService } from './restaurants/restaurant/restaurant.service';
 import { RestaurantDetailComponent } from './restaurant-detail/restaurant-detail.component';
 import { MenuComponent } from './restaurant-detail/menu/menu.component';
 import { ShoppingComponent } from './restaurant-detail/shopping/shopping.component';
 import { MenuItemComponent } from './restaurant-detail/menu-item/menu-item.component';
 import { ReviewComponent } from './restaurant-detail/review/review.component';
-import { ShoppingService } from './restaurant-detail/shopping/shopping.service';
-import { OrderService } from './order/order.service';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -30,16 +28,17 @@ import { SharedModule } from './shared/shared.module';
     MenuComponent,
     ShoppingComponent,
     MenuItemComponent,
-    ReviewComponent,    
-    OrderSummaryComponent,    
+    ReviewComponent,
+    OrderSummaryComponent,
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    SharedModule,    
+    SharedModule,
+    CoreModule,
     RouterModule.forRoot(ROUTES)
   ],
-  providers: [RestaurantService, ShoppingService, OrderService, { provide: LOCALE_ID, useValue: 'pt-BR' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
