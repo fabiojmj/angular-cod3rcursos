@@ -7,12 +7,16 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ShoppingService } from "app/restaurant-detail/shopping/shopping.service";
 import { RestaurantService } from "app/restaurants/restaurant/restaurant.service";
 import { OrderService } from "app/order/order.service";
+import { SnackbarComponent } from "./messages/snackbar/snackbar.component";
+
+
 
 @NgModule({
     declarations: [
         InputComponent,
         RadioComponent,
-        RatingComponent
+        RatingComponent,
+        SnackbarComponent        
     ],
     imports: [
         CommonModule,
@@ -25,7 +29,8 @@ import { OrderService } from "app/order/order.service";
         RatingComponent,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        SnackbarComponent
     ]
 })
 export class SharedModule {
