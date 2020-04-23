@@ -5,6 +5,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { FormArrayName, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/do'
+import 'rxjs/add/operator/debounceTime'
+import 'rxjs/add/operator/distinctUntilChanged'
 
 @Component({
   selector: 'mt-restaurants',
@@ -44,9 +47,12 @@ export class RestaurantsComponent implements OnInit {
       searchControl: this.searchControl
     });
 
-    this.searchControl.valueChanges.switchMap(
-      searchTerm => this.restauranteService
-        .restaurants(searchTerm))
+    this.searchControl.valueChanges
+      .debounceTime(500)
+      .distinctUntilChanged()      
+      .switchMap(
+        searchTerm => this.restauranteService
+          .restaurants(searchTerm))
       .subscribe(restaurants => this.restaurants = restaurants)
 
     this.restauranteService.restaurants()
