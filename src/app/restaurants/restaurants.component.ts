@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantService } from './restaurant/restaurant.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FormArrayName, FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
+import 'rxjs/add/operator/switchMap'
 
 @Component({
   selector: 'mt-restaurants',
@@ -15,11 +17,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         "max-height": "0px"
       })),
       state('visible', style({
-        opacity:1,
-        "max-height":"70px",
-        "margin-top":"20px"
+        opacity: 1,
+        "max-height": "70px",
+        "margin-top": "20px"
       })),
-      transition('* => *',animate('250ms 0s ease-in-out'))
+      transition('* => *', animate('250ms 0s ease-in-out'))
     ])
   ]
 })
@@ -29,14 +31,29 @@ export class RestaurantsComponent implements OnInit {
 
   restaurants: Restaurant[];
 
-  constructor(private restauranteService: RestaurantService) { }
+  searchForm: FormGroup;
+  searchControl: FormControl;
+
+  constructor(private restauranteService: RestaurantService,
+    private fb: FormBuilder) { }
 
   ngOnInit() {
+
+    this.searchControl = this.fb.control('');
+    this.searchForm = this.fb.group({
+      searchControl: this.searchControl
+    });
+
+    this.searchControl.valueChanges.switchMap(
+      searchTerm => this.restauranteService
+        .restaurants(searchTerm))
+      .subscribe(restaurants => this.restaurants = restaurants)
+
     this.restauranteService.restaurants()
       .subscribe(restaurants => this.restaurants = restaurants);
   }
 
-  toogleSearch(){
+  toogleSearch() {
     this.searchBarState = this.searchBarState === 'hidden' ? 'visible' : 'hidden';
   }
 

@@ -9,9 +9,9 @@
 
     <div class="row">
         <div class="col-xs-12 search-bar" [@toogleSeach]='searchBarState'>
-            <form action="">
+            <form [formGroup]='searchForm'>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="O que voce esta procurando?">
+                    <input type="text" formControlName='searchControl' class="form-control" placeholder="O que voce esta procurando?">
                 </div>
             </form>
         </div>

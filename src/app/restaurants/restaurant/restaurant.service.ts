@@ -18,8 +18,12 @@ export class RestaurantService {
 
   constructor(private http: Http) { }
 
-  restaurants(): Observable<Restaurant[]> {
-    return this.http.get(`${MEAT_API}/restaurants`)
+  restaurants(search?: string): Observable<Restaurant[]> {
+    return this.http.get(`${MEAT_API}/restaurants`, {
+      params: {
+        q: search
+      }
+    })
       .map(response => response.json())
       .catch(ErrorHandler.handlerError)
   }
@@ -36,7 +40,7 @@ export class RestaurantService {
       .catch(ErrorHandler.handlerError);
   }
 
-  menuOfRestaurant(id: string): Observable<MenuItem[]>{
+  menuOfRestaurant(id: string): Observable<MenuItem[]> {
     return this.http.get(`${MEAT_API}/restaurants/${id}/menu`)
       .map(response => response.json())
       .catch(ErrorHandler.handlerError);
