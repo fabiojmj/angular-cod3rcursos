@@ -6,6 +6,8 @@ import * as https from 'https'
 
 import * as path from 'path'
 
+import { handleAuthentication } from './auth'
+
 const server = jsonServer.create()
 const router = jsonServer.router('db.json')
 const middlewares = jsonServer.defaults()
@@ -14,6 +16,8 @@ const middlewares = jsonServer.defaults()
 server.use(middlewares)
 
 server.use(jsonServer.bodyParser)
+
+server.post('/login', handleAuthentication)
 
 // Use default router
 server.use(router)
