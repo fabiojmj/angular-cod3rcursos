@@ -20,6 +20,6 @@ export class LoginService {
         return this.http.post<User>(`${MEAT_API}/login`, {
             email: email,
             password: password
-        }).do(user => user)
+        }).do(user => this.user = user)
     }
 }
