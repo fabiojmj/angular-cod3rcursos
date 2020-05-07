@@ -6,12 +6,15 @@ import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
+import "rxjs/add/operator/do"
+
 @Component({
   selector: 'mt-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+
 
   emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
@@ -24,6 +27,7 @@ export class OrderComponent implements OnInit {
     { 'label': "Cartão", value: 'DEB' },
     { 'label': "Cartão Refeição", value: 'REF' },
   ]
+  orderId: any;
 
   constructor(private orderService: OrderService,
     private router: Router,
@@ -84,11 +88,17 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
       .map((item: CartItem) => new OrderItem(item.quantidade, item.menuItem.id));
     this.orderService.checkOrder(order)
+      .do((orderId: string)=>{
+        this.orderId = orderId
+      })
       .subscribe(() => {
         this.router.navigate(['/order-summary'])
         this.orderService.clear();
-      });
-    console.log(order);
+      });    
+  }
+
+  isOrderCompleted(): boolean {
+    return this.orderId !== undefined
   }
 
 }
