@@ -12,8 +12,7 @@ import { LoginService } from "app/security/login/login.service";
 @Injectable()
 export class OrderService {
     constructor(private cartService: ShoppingService,
-        private http: HttpClient,
-        private loginSerivce: LoginService) { }
+        private http: HttpClient) { }
 
     cartItems(): CartItem[] {
         return this.cartService.items;
@@ -36,13 +35,7 @@ export class OrderService {
     }
 
     checkOrder(order: Order): Observable<string> {
-        let headers = new HttpHeaders();
-        if(this.loginSerivce.isLoggedIn()){
-            headers = headers.set('Authorization',`Bearer ${this.loginSerivce.user.accessToken}`)
-        }        
-        return this.http.post<Order>(`${MEAT_API}/orders/`, order,{
-            headers: headers
-        })
+        return this.http.post<Order>(`${MEAT_API}/orders/`, order)
             .map(order => order.id);
     }
 
