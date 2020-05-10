@@ -18,7 +18,11 @@ import { SharedModule } from './shared/shared.module';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { LocationStrategy, HashLocationStrategy,registerLocaleData } from '@angular/common';
+import locatePt from '@angular/common/locales/pt'
+
+registerLocaleData(locatePt,'pt')
+
 import { LoginComponent } from './security/login/login.component';
 import { UserDetailComponent } from './header/user-detail/user-detail.component';
 import { ApplicationErrorHandler } from './app.erro-handler';
@@ -48,7 +52,7 @@ import { ApplicationErrorHandler } from './app.erro-handler';
     SharedModule.forRoot(),
     RouterModule.forRoot(ROUTES, { preloadingStrategy: PreloadAllModules })
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }, {
+  providers: [{ provide: LOCALE_ID, useValue: 'pt' }, {
     provide: ErrorHandler, useClass: ApplicationErrorHandler
   }],
   bootstrap: [AppComponent]
