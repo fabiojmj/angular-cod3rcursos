@@ -7,6 +7,7 @@ import { keyframes } from '@angular/animations';
   selector: 'mt-shopping',
   templateUrl: './shopping.component.html',
   styleUrls: ['./shopping.component.css'],
+  preserveWhitespaces:true,  
   animations: [
     trigger('row', [
       state('ready', style({ opacity: 1 })),
