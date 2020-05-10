@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping/cart-item.model';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 
 import "rxjs/add/operator/do"
 
@@ -36,8 +36,10 @@ export class OrderComponent implements OnInit {
   delivery: number = 8;
 
   ngOnInit() {
-    this.orderForm = this.formBuilder.group({
-      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+    this.orderForm = new FormGroup({
+      name: new FormControl('', {
+        validators: [Validators.required, Validators.minLength(5)]
+      }),
       email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       emailConfirmed: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
@@ -45,7 +47,8 @@ export class OrderComponent implements OnInit {
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('', [Validators.required]),
     }, {
-      validator: OrderComponent.equalTo
+      validators: [OrderComponent.equalTo],
+      updateOn: 'blur'
     })
   }
 
@@ -88,13 +91,13 @@ export class OrderComponent implements OnInit {
     order.orderItems = this.cartItems()
       .map((item: CartItem) => new OrderItem(item.quantidade, item.menuItem.id));
     this.orderService.checkOrder(order)
-      .do((orderId: string)=>{
+      .do((orderId: string) => {
         this.orderId = orderId
       })
       .subscribe(() => {
         this.router.navigate(['/order-summary'])
         this.orderService.clear();
-      });    
+      });
   }
 
   isOrderCompleted(): boolean {
