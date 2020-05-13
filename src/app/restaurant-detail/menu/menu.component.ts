@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestaurantService } from 'app/restaurants/restaurant/restaurant.service';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from '../menu-item/menu-tem.model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'mt-menu',

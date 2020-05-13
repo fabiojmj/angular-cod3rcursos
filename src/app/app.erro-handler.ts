@@ -1,6 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http'
-import 'rxjs/add/observable/throw'
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Injectable, ErrorHandler, Injector, NgZone } from '@angular/core';
 import { NotificationService } from './shared/messages/notification.service';
 import { LoginService } from './security/login/login.service';
